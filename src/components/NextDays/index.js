@@ -8,7 +8,7 @@ import {
   DayContent,
   Day,
   MaxAndMin,
-  TodayHightlights,
+  TodayHighlights,
   Highlight,
   Footer
 } from './styles';
@@ -64,8 +64,8 @@ function NextDays() {
           </MaxAndMin>
         </DayContent>
       </Days>
-      <h2>Today’s Hightlights </h2>
-      <TodayHightlights>
+      <h2>Today’s Highlights </h2>
+      <TodayHighlights>
         <Highlight>
           <span>Wind status</span>
           <div>
@@ -94,7 +94,7 @@ function NextDays() {
             <span> mb</span>
           </div>
         </Highlight>
-      </TodayHightlights>
+      </TodayHighlights>
       <Footer>Juliano Sirtori @ DevChallenges.io</Footer>
     </Container>
   );

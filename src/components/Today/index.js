@@ -11,11 +11,11 @@ import {
 
 import RainDay from '../../assets/rainDay.png';
 
-function Today() {
+function Today({callBackButtonSearchForPlaces}) {
   return(
   <Container>
     <Header>
-      <button>Search for places</button>
+      <button onClick={callBackButtonSearchForPlaces}>Search for places</button>
       <button className="location"><MdMyLocation size={22} color="#E7E7EB" /></button>
     </Header>
     <WeatherImages>

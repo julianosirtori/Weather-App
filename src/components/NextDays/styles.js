@@ -103,7 +103,7 @@ export const MaxAndMin = styled.div`
 `;
 
 
-export const TodayHightlights = styled.div`
+export const TodayHighlights = styled.div`
   width: 100%;
   max-width: 720px;
   display: grid;
