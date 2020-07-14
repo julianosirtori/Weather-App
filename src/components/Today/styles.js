@@ -8,7 +8,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 46px;
+  overflow: hidden;
+  z-index: 5;
+
 `;
 
 export const Header = styled.div`
@@ -17,7 +19,7 @@ export const Header = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 46px;
+  padding: 46px;
 
   button{
     height: 40px;
@@ -51,6 +53,10 @@ export const WeatherImages  = styled.div`
   justify-content: center;
   align-items: center;
 
+  .clounds{
+    position: absolute;
+    left: 0px;
+  }
 `;
 
 export const Temperature = styled.div`
@@ -96,6 +102,7 @@ export const Footer = styled.div`
   justify-content: center;
   align-items: center;
   color: #88869D;
+  padding: 46px;
 
 
   div{

@@ -10,9 +10,10 @@ export const Container = styled.div`
   flex-direction: column;
   background: #100E1D;
   padding: 32px;
+  z-index: 10;
 
   h2{
-    max-width: 720px;
+    max-width: 860px;
     margin-top: 72px;
     color: #E7E7EB;
     font-size: 24px;
@@ -23,7 +24,7 @@ export const Container = styled.div`
 
 export const Header = styled.div`
   width: 100%;
-  max-width: 720px;
+  max-width: 860px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -48,15 +49,15 @@ export const ButtonUnitTemperature = styled.button`
 
 export const Days = styled.div`
   display: flex;
-  max-width: 720px;
+  max-width: 860px;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  margin-top: 56px;
+  margin-top: 24px;
 `;
 
 export const DayContent = styled.div`
-  max-width: 120px;
+  max-width: 128px;
   width: 100%;
   background: #1E213A;
   padding: 18px;
@@ -105,7 +106,7 @@ export const MaxAndMin = styled.div`
 
 export const TodayHighlights = styled.div`
   width: 100%;
-  max-width: 720px;
+  max-width: 860px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -114,7 +115,7 @@ export const TodayHighlights = styled.div`
 
 export const Highlight = styled.div`
   background: #1E213A;
-  max-width: 328px;
+  max-width: 428px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -142,6 +143,26 @@ export const Highlight = styled.div`
     span{
       font-size: 36px;
     }
+  }
+
+`;
+
+
+export const WindDirection = styled.span`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  line-height: 16px;
+  font-size: 14px;
+
+  svg{
+    margin-right: 8px;
+    background: #616375;
+    padding: 4px;
+    border-radius: 50%;
+    transform: rotate(-150deg);
+
   }
 
 `;

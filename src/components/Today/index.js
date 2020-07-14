@@ -1,5 +1,6 @@
 import React from 'react';
-import {MdMyLocation, MdLocationOn} from 'react-icons/md';
+import { format } from 'date-fns';
+import { MdMyLocation, MdLocationOn } from 'react-icons/md';
 import { useWeather } from '../../context/Weathers';
 import {
   Container,
@@ -10,39 +11,45 @@ import {
   Location
 } from './styles';
 
-import RainDay from '../../assets/rainDay.png';
+import Clouds from '../../assets/clouds.svg';
 
 function Today({callBackButtonSearchForPlaces}) {
   const { weather } = useWeather();
+  const today = {
+    ...weather.consolidated_weather[0],
+    todayFormatted: format(new Date(), '	EEE, dd MMM')
+  };
 
   return(
   <Container>
+
     <Header>
       <button onClick={callBackButtonSearchForPlaces}>Search for places</button>
       <button className="location"><MdMyLocation size={22} color="#E7E7EB" /></button>
     </Header>
     <WeatherImages>
-      <img src={RainDay} alt="rainDay"/>
+      <img className="clounds" src={Clouds} alt="clounds"/>
+      <img src={`https://www.metaweather.com/static/img/weather/${today.weather_state_abbr}.svg`} alt="rainDay"/>
     </WeatherImages>
     <Temperature>
       <div>
-        <span>15</span>
+        <span>{parseInt(today.the_temp)}</span>
         <strong>℃</strong>
       </div>
 
-      <strong> Shower </strong>
+      <strong>{today.weather_state_name} </strong>
     </Temperature>
 
     <Footer>
       <div>
         <span>Today</span>
         <span>•</span>
-        <span>Fri, 5 Jun</span>
+        <span>{today.todayFormatted}</span>
       </div>
 
       <Location>
        <MdLocationOn size={24} color="#88869D"/>
-       Helsinki
+       { weather.title }
     </Location>
     </Footer>
 

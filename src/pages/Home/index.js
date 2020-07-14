@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
 import api from '../../services/api';
-import data from '../../mock/data.json';
 import { useWeather } from '../../context/Weathers';
 import NextDays from '../../components/NextDays';
 import Today from '../../components/Today';
@@ -18,7 +17,7 @@ function Home() {
     async function fetchWeather(){
       // const response = await api.get('/api/location/44418/');
       // const { data } = response;
-      setWeather(data);
+      // setWeather(data);
     }
 
     fetchWeather();

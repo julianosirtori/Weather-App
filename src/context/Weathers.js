@@ -1,9 +1,11 @@
 import React, { createContext, useState, useContext } from 'react';
 
+import data from '../mock/data.json';
+
 const WeathersContext = createContext();
 
 export default function WeathersProvider({ children }){
-  const [weather, setWeather] = useState();
+  const [weather, setWeather] = useState(data);
 
   return (
     <WeathersContext.Provider
