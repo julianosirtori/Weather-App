@@ -1,4 +1,5 @@
 import React from 'react';
+import { useWeather } from '../../context/Weathers';
 
 import {
   Container,
@@ -16,6 +17,8 @@ import RainDay from '../../assets/rainDay.png';
 
 
 function NextDays() {
+  const { weather } = useWeather();
+
   return (
     <Container>
       <Header>

@@ -1,23 +1,30 @@
 import React, {useState, useEffect} from 'react';
-import api from '../../services/api';
 
+import api from '../../services/api';
+import data from '../../mock/data.json';
+import { useWeather } from '../../context/Weathers';
 import NextDays from '../../components/NextDays';
 import Today from '../../components/Today';
 import SearchLocation from '../../components/SearchLocation';
+
 
 import { Container } from './styles';
 
 function Home() {
   const [showSearchLocation, setShowSearchLocation] = useState(false);
+  const { setWeather } = useWeather();
 
   useEffect(()=> {
+    async function fetchWeather(){
+      // const response = await api.get('/api/location/44418/');
+      // const { data } = response;
+      setWeather(data);
+    }
+
     fetchWeather();
   }, []);
 
-  async function fetchWeather(){
-    const response = await api.get('/api/location/44418/');
-    console.log(response);
-  }
+
 
   function callBackButtonSearchForPlaces(){
     setShowSearchLocation(!showSearchLocation);

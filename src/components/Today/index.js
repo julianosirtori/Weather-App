@@ -1,5 +1,6 @@
 import React from 'react';
 import {MdMyLocation, MdLocationOn} from 'react-icons/md';
+import { useWeather } from '../../context/Weathers';
 import {
   Container,
   Header,
@@ -12,6 +13,8 @@ import {
 import RainDay from '../../assets/rainDay.png';
 
 function Today({callBackButtonSearchForPlaces}) {
+  const { weather } = useWeather();
+
   return(
   <Container>
     <Header>
