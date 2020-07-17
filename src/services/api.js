@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://cors-anywhere.herokuapp.com/metaweather.com',
+  baseURL: 'http://localhost:8080/metaweather.com',
 });
 
 export default api;

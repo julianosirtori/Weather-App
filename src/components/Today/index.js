@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { format } from 'date-fns';
+import api from '../../services/api';
+import getCurrentPosition from '../../utils/getCurrentPosition';
 import { MdMyLocation, MdLocationOn } from 'react-icons/md';
 import { useWeather } from '../../context/Weathers';
 import {
@@ -14,18 +16,37 @@ import {
 import Clouds from '../../assets/clouds.svg';
 
 function Today({callBackButtonSearchForPlaces}) {
-  const { weather } = useWeather();
+  const { weather, fetchWeatherByLocation } = useWeather();
   const today = {
     ...weather.consolidated_weather[0],
     todayFormatted: format(new Date(), '	EEE, dd MMM')
   };
+
+
+  useEffect(()=> {
+    fetchWeatherByLocation({});
+  }, []);
+
+  async function searchLocationByPosition(position){
+    const response = await api.get(`/api/location/search/?lattlong=${position}`);
+    const {data} = response;
+    if(data.length > 0){
+      fetchWeatherByLocation(data[0].woeid);
+    }
+  }
+
+  function setWeatherLocation(){
+    getCurrentPosition((latitude, longitude)=> {
+      searchLocationByPosition(`${latitude},${longitude}`);
+    })
+  }
 
   return(
   <Container>
 
     <Header>
       <button onClick={callBackButtonSearchForPlaces}>Search for places</button>
-      <button className="location"><MdMyLocation size={22} color="#E7E7EB" /></button>
+      <button onClick={setWeatherLocation} className="location"><MdMyLocation size={22} color="#E7E7EB" /></button>
     </Header>
     <WeatherImages>
       <img className="clounds" src={Clouds} alt="clounds"/>

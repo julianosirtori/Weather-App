@@ -159,10 +159,9 @@ export const WindDirection = styled.span`
   svg{
     margin-right: 8px;
     background: #616375;
-    padding: 4px;
+    padding: 8px;
     border-radius: 50%;
     transform: rotate(-150deg);
-
   }
 
 `;
