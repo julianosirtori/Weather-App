@@ -40,4 +40,13 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
+  @keyframes load {
+    from {
+        left: -150px;
+    }
+    to   {
+        left: 100%;
+    }
+  }
+
 `;

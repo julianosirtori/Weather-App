@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {darken} from 'polished';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   max-width: 460px;
@@ -47,7 +47,7 @@ export const Header = styled.div`
 
 `;
 
-export const WeatherImages  = styled.div`
+export const WeatherImages = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -94,7 +94,6 @@ export const Temperature = styled.div`
   }
 `;
 
-
 export const Footer = styled.div`
   display: flex;
   width: 100%;
@@ -129,4 +128,28 @@ export const Location = styled.div`
   svg{
     margin-right: 4px;
   }
+`;
+
+export const PlaceholderContainer = styled.div`
+  position: relative;
+  z-index: 5;
+  max-width: 460px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+
+  &::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: -150px;
+    top: 0;
+    height: 100%;
+    max-width: 460px;
+    width: 100%;
+    background: linear-gradient(to right, transparent 0%, #2f3359 50%, transparent 100%);
+    animation: load infinite 1s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+
 `;

@@ -1,11 +1,10 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import api from '../../services/api';
 import { useWeather } from '../../context/Weathers';
 import NextDays from '../../components/NextDays';
 import Today from '../../components/Today';
 import SearchLocation from '../../components/SearchLocation';
-
 
 import { Container } from './styles';
 
@@ -14,30 +13,31 @@ function Home() {
   const { setWeather } = useWeather();
 
   useEffect(() => {
-    async function fetchWeather(){
-      const response = await api.get('/data/2.5/weather', {
+    async function fetchWeather() {
+      const response = await api.get('/data/2.5/forecast', {
         params: {
           lon: -51.94,
-          lat: -23.43
-        }
+          lat: -23.43,
+        },
       });
-      console.log(response);
+      const { data } = response;
+      setWeather(data);
     }
     fetchWeather();
+  }, [setWeather]);
 
-  }, [setWeather])
-
-  function callBackButtonSearchForPlaces(){
+  function callBackButtonSearchForPlaces() {
     setShowSearchLocation(!showSearchLocation);
   }
 
   return (
-  <Container>
-    { showSearchLocation ?
-      ( <SearchLocation callBackToClose={callBackButtonSearchForPlaces}></SearchLocation> ):
-      ( <Today callBackButtonSearchForPlaces={callBackButtonSearchForPlaces} ></Today> ) }
-    <NextDays></NextDays>
-  </Container>);
+    <Container>
+      { showSearchLocation
+        ? (<SearchLocation callBackToClose={callBackButtonSearchForPlaces} />)
+        : (<Today callBackButtonSearchForPlaces={callBackButtonSearchForPlaces} />) }
+      <NextDays />
+    </Container>
+  );
 }
 
 export default Home;

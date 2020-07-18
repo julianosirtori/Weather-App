@@ -1,73 +1,78 @@
 import React from 'react';
-import { format } from 'date-fns';
+import { MdMyLocation, MdLocationOn } from 'react-icons/md';
 import api from '../../services/api';
 import getCurrentPosition from '../../utils/getCurrentPosition';
-import { MdMyLocation, MdLocationOn } from 'react-icons/md';
-import { useWeather } from '../../context/Weathers';
+import { useLoading } from '../../context/Loading';
+
 import {
   Container,
+  PlaceholderContainer,
   Header,
   WeatherImages,
   Temperature,
   Footer,
-  Location
+  Location,
 } from './styles';
 
 import Clouds from '../../assets/clouds.svg';
 
-function Today({callBackButtonSearchForPlaces}) {
-  const { weather } = useWeather();
-  const today = {
-    ...weather.consolidated_weather[0],
-    todayFormatted: format(new Date(), '	EEE, dd MMM')
-  };
+function Today({ callBackButtonSearchForPlaces }) {
+  const { loading } = useLoading();
 
-  function setWeatherLocation(){
-    getCurrentPosition(async (latitude, longitude)=> {
-      const response = await api.get('/data/2.5/weather', {
+  function setWeatherLocation() {
+    getCurrentPosition(async (latitude, longitude) => {
+      const response = await api.get('/data/2.5/forecast', {
         params: {
           lon: longitude,
-          lat: latitude
-        }
+          lat: latitude,
+        },
       });
       console.log(response);
-    })
+    });
   }
 
-  return(
-  <Container>
+  return loading
+    ? <PlaceholderContainer />
+    : (
+      <Container>
 
-    <Header>
-      <button onClick={callBackButtonSearchForPlaces}>Search for places</button>
-      <button onClick={setWeatherLocation} className="location"><MdMyLocation size={22} color="#E7E7EB" /></button>
-    </Header>
-    <WeatherImages>
-      <img className="clounds" src={Clouds} alt="clounds"/>
-      <img src={`https://www.metaweather.com/static/img/weather/${today.weather_state_abbr}.svg`} alt="rainDay"/>
-    </WeatherImages>
-    <Temperature>
-      <div>
-        <span>{parseInt(today.the_temp)}</span>
-        <strong>℃</strong>
-      </div>
+        <Header>
+          <button type="button" onClick={callBackButtonSearchForPlaces}>Search for places</button>
+          <button type="button" onClick={setWeatherLocation} className="location">
+            <MdMyLocation size={22} color="#E7E7EB" />
+          </button>
+        </Header>
+        <WeatherImages>
+          <img className="clounds" src={Clouds} alt="clounds" />
+          {/* <img src={`https://www.metaweather.com/static/img/weather/${today.weather_state_abbr}.svg`} alt="rainDay" /> */}
+        </WeatherImages>
+        <Temperature>
+          <div>
+            <span>10</span>
+            <strong>℃</strong>
+          </div>
 
-      <strong>{today.weather_state_name} </strong>
-    </Temperature>
+          <strong>
+            Tempo
 
-    <Footer>
-      <div>
-        <span>Today</span>
-        <span>•</span>
-        <span>{today.todayFormatted}</span>
-      </div>
+          </strong>
+        </Temperature>
 
-      <Location>
-       <MdLocationOn size={24} color="#88869D"/>
-       { weather.title }
-    </Location>
-    </Footer>
+        <Footer>
+          <div>
+            <span>Today</span>
+            <span>•</span>
+            <span>C</span>
+          </div>
 
-  </Container>);
+          <Location>
+            <MdLocationOn size={24} color="#88869D" />
+            Maringa
+          </Location>
+        </Footer>
+
+      </Container>
+    );
 }
 
 export default Today;

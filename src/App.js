@@ -1,15 +1,19 @@
 import React from 'react';
 
 import WeathersProvider from './context/Weathers';
+import LoadingProvider from './context/Loading';
 import GlobalStyle from './styles/global';
 import Home from './pages/Home';
 
 function App() {
   return (
-    <WeathersProvider>
-      <GlobalStyle/>
-      <Home/>
-    </WeathersProvider>
+    <LoadingProvider>
+      <WeathersProvider>
+        <GlobalStyle/>
+        <Home/>
+      </WeathersProvider>
+    </LoadingProvider>
+
   );
 }
 

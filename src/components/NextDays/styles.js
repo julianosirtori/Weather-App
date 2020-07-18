@@ -34,16 +34,16 @@ export const Header = styled.div`
 export const ButtonUnitTemperature = styled.button`
   width: 40px;
   height: 40px;
-  color: ${props => props.active ? '#110E3C' : '#E7E7EB'} ;
+  color: ${(props) => (props.active ? '#110E3C' : '#E7E7EB')} ;
   font-size: 18px;
   font-weight: bold;
-  background: ${props => props.active ? '#E7E7EB' : '#585676'} ;
+  background: ${(props) => (props.active ? '#E7E7EB' : '#585676')} ;
   border-radius: 50px;
   margin-left: 12px;
   border: none;
 
   &:hover{
-    background:  ${props => darken(0.1, props.active ? '#E7E7EB' : '#585676')}
+    background:  ${(props) => darken(0.1, props.active ? '#E7E7EB' : '#585676')}
   }
 `;
 
@@ -85,7 +85,6 @@ export const Day = styled.div`
   margin-bottom: 10px;
 `;
 
-
 export const MaxAndMin = styled.div`
   display: flex;
   flex-direction: row;
@@ -102,7 +101,6 @@ export const MaxAndMin = styled.div`
     font-weight: 500px;
   }
 `;
-
 
 export const TodayHighlights = styled.div`
   width: 100%;
@@ -147,7 +145,6 @@ export const Highlight = styled.div`
 
 `;
 
-
 export const WindDirection = styled.span`
   display: flex;
   flex-direction: row;
@@ -171,4 +168,48 @@ export const Footer = styled.p`
   font-weight: 600;
   font-size: 14px;
   color: #616475;
+`;
+
+export const PlaceholderDayContent = styled.div`
+  position: relative;
+  background: #1E213A;
+  overflow: hidden;
+  max-width: 128px;
+  width: 100%;
+  height: 160px;
+
+  &::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: -150px;
+    top: 0;
+    height: 100%;
+    width: 150px;
+    background: linear-gradient(to right, transparent 0%, #2f3359 50%, transparent 100%);
+    animation: load infinite 1s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+
+`;
+
+export const PlaceholderHighlight = styled.div`
+ position: relative;
+  overflow: hidden;
+  background: #1E213A;
+  max-width: 428px;
+  padding: 22px;
+  width: 100%;
+  height: 160px;
+
+  &::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: -150px;
+    top: 0;
+    height: 100%;
+    width: 150px;
+    background: linear-gradient(to right, transparent 0%, #2f3359 50%, transparent 100%);
+    animation: load infinite 1s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
 `;
