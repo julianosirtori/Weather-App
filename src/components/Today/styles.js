@@ -53,7 +53,11 @@ export const WeatherImages = styled.div`
   justify-content: center;
   align-items: center;
 
-  .clounds{
+  i{
+    font-size: 120px;
+  }
+
+  img{
     position: absolute;
     left: 0px;
   }

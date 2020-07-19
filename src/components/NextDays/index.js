@@ -1,5 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
+import findIconByCode from '../../utils/findIcon';
 import { useWeather } from '../../context/Weathers';
 import { useLoading } from '../../context/Loading';
 import {
@@ -47,7 +48,7 @@ function NextDays() {
           : weather.daily.map((day) => (
             <DayContent key={day.dt}>
               <Day>{formattedDate(day.dt)}</Day>
-              {/* <img src={`https://www.metaweather.com/static/img/weather/${day.weather_state_abbr}.svg`} alt="rainDay" /> */}
+              <i className={findIconByCode(day.weather[0].id)} />
               <MaxAndMin>
                 <span>
                   {`${parseInt(day.temp.max, 10)}°C`}

@@ -67,10 +67,10 @@ export const DayContent = styled.div`
   justify-content: center;
   margin-right: 4px;
 
-  img{
-    margin: 0 auto;
-    width: 60px;
-    margin-bottom: 32px;
+  i{
+    font-size: 48px;
+    padding-bottom: 16px;
+    padding-top: 16px;
   }
 `;
 

@@ -3,6 +3,7 @@ import { MdMyLocation, MdLocationOn } from 'react-icons/md';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { fetchWeather } from '../../services/api';
+import findIconByCode from '../../utils/findIcon';
 import getCurrentPosition from '../../utils/getCurrentPosition';
 import { useLoading } from '../../context/Loading';
 import { useWeather } from '../../context/Weathers';
@@ -51,9 +52,8 @@ function Today({ callBackButtonSearchForPlaces }) {
           </button>
         </Header>
         <WeatherImages>
-          <img className="clounds" src={Clouds} alt="clounds" />
-          <i className="wi wi-day-sprinkle" />
-          {/* <img src={`https://www.metaweather.com/static/img/weather/${today.weather_state_abbr}.svg`} alt="rainDay" /> */}
+          <img src={Clouds} alt="clouds" />
+          <i className={findIconByCode(weather.weather[0].id)} />
         </WeatherImages>
         <Temperature>
           <div>

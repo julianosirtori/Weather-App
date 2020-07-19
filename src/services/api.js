@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setWeather } from './storage';
 
 const api = axios.create({
   baseURL: 'http://api.openweathermap.org/',
@@ -34,6 +35,7 @@ export async function fetchWeather(params) {
   const { coord } = data;
   let { daily } = await fetchForecastDaily(coord.lat, coord.lon);
   daily = daily.slice(3);
+  setWeather({ ...data, daily });
   return { ...data, daily };
 }
 
