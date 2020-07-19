@@ -67,8 +67,10 @@ export const ListLocation = styled.ul`
   padding: 0;
   margin: 0;
 
-  li{
+  button{
     padding: 22px 12px;
+    background: none;
+    color: #E7E7EB;
     font-size: 16px;
     font-weight: 500;
     transition: 0.2s;

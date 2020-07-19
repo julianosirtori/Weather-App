@@ -46,7 +46,7 @@ function Today({ callBackButtonSearchForPlaces }) {
       <Container>
 
         <Header>
-          <button type="button" onClick={callBackButtonSearchForPlaces}>Search for places</button>
+          <button type="button" onClick={callBackButtonSearchForPlaces}>Procure por lugares</button>
           <button type="button" onClick={setWeatherLocation} className="location">
             <MdMyLocation size={22} color="#E7E7EB" />
           </button>

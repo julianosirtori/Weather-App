@@ -6,12 +6,13 @@ export function getCurrentLocation() {
   return JSON.parse(localStorage.getItem('location'));
 }
 
-export function getCities() {
-  return JSON.parse(localStorage.getItem('cities'));
+export function getLocations() {
+  const locations = JSON.parse(localStorage.getItem('locations'));
+  return locations || [];
 }
 
-export function setCities(cities) {
-  return localStorage.getItem('cities', JSON.stringify(cities));
+export function setLocations(locations) {
+  localStorage.setItem('locations', JSON.stringify(locations));
 }
 
 export function getWeather() {
@@ -25,7 +26,7 @@ export function setWeather(weather) {
 export default function getStorage() {
   return {
     location: getCurrentLocation(),
-    cities: getCities(),
+    locations: getLocations(),
     weather: getWeather(),
   };
 }
