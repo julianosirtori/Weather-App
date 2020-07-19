@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdNavigation } from 'react-icons/md';
+import { format } from 'date-fns';
 import { useWeather } from '../../context/Weathers';
 import { useLoading } from '../../context/Loading';
 import {
@@ -12,7 +12,6 @@ import {
   MaxAndMin,
   TodayHighlights,
   Highlight,
-  WindDirection,
   Footer,
   PlaceholderDayContent,
   PlaceholderHighlight,
@@ -21,6 +20,10 @@ import {
 function NextDays() {
   const { weather } = useWeather();
   const { loading } = useLoading();
+
+  function formattedDate(dt) {
+    return format(new Date(dt * 1000), "dd 'de' yyyy");
+  }
 
   return (
     <Container>
@@ -41,23 +44,23 @@ function NextDays() {
               <PlaceholderDayContent />
             </>
           )
-          : weather.consolidated_weather.map((day) => (
-            <DayContent key={day.applicable_date}>
-              <Day>05 de 2020</Day>
+          : weather.daily.map((day) => (
+            <DayContent key={day.dt}>
+              <Day>{formattedDate(day.dt)}</Day>
               {/* <img src={`https://www.metaweather.com/static/img/weather/${day.weather_state_abbr}.svg`} alt="rainDay" /> */}
               <MaxAndMin>
                 <span>
-                  10°C
+                  {`${parseInt(day.temp.max, 10)}°C`}
                 </span>
                 <span>
-                  10°C
+                  {`${parseInt(day.temp.min, 10)}°C`}
                 </span>
               </MaxAndMin>
             </DayContent>
           )) }
 
       </Days>
-      <h2>Today’s Highlights </h2>
+      <h2>Destaques de hoje</h2>
 
       { loading
         ? (
@@ -70,35 +73,31 @@ function NextDays() {
         ) : (
           <TodayHighlights>
             <Highlight>
-              <span>Wind status</span>
+              <span>Status do vento</span>
               <div>
-                <strong>10</strong>
-                <span>mph</span>
+                <strong>{parseInt(weather.wind.speed, 10)}</strong>
+                <span>km/h</span>
               </div>
-              <WindDirection>
-                <MdNavigation size={28} color="#FFF" />
-                SNw
-              </WindDirection>
             </Highlight>
             <Highlight>
-              <span>Humidity</span>
+              <span>Umidade</span>
               <div>
-                <strong>10</strong>
+                <strong>{weather.main.humidity}</strong>
                 <span>%</span>
               </div>
             </Highlight>
             <Highlight>
-              <span>Visibility</span>
+              <span>Nuvens</span>
               <div>
-                <strong>10</strong>
-                <span>miles</span>
+                <strong>{weather.clouds.all}</strong>
+                <span>%</span>
               </div>
             </Highlight>
             <Highlight>
-              <span>Air Pressure</span>
+              <span>Pressão do ar</span>
               <div>
-                <strong>10</strong>
-                <span> mb</span>
+                <strong>{weather.main.pressure}</strong>
+                <span>hPa</span>
               </div>
             </Highlight>
           </TodayHighlights>

@@ -65,10 +65,7 @@ export const DayContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  & > div + div{
-    margin-left: 16px;
-  }
+  margin-right: 4px;
 
   img{
     margin: 0 auto;
@@ -82,6 +79,8 @@ export const Day = styled.div`
   color: #E7E7EB;
   font-size: 16px;
   font-weight: 500px;
+  width: 100%;
+  white-space: nowrap;
   margin-bottom: 10px;
 `;
 

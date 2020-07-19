@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdMyLocation, MdLocationOn } from 'react-icons/md';
-import api from '../../services/api';
+import { format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+import { fetchWeather } from '../../services/api';
 import getCurrentPosition from '../../utils/getCurrentPosition';
 import { useLoading } from '../../context/Loading';
+import { useWeather } from '../../context/Weathers';
 
 import {
   Container,
@@ -17,17 +20,22 @@ import {
 import Clouds from '../../assets/clouds.svg';
 
 function Today({ callBackButtonSearchForPlaces }) {
-  const { loading } = useLoading();
+  const { loading, setLoading } = useLoading();
+  const { weather, setWeather } = useWeather();
+  const [dateFormatted, setDateFormatted] = useState();
+
+  useEffect(() => {
+    setDateFormatted(format(new Date(), "EEE, dd 'de' MMMM", {
+      locale: pt,
+    }));
+  }, []);
 
   function setWeatherLocation() {
     getCurrentPosition(async (latitude, longitude) => {
-      const response = await api.get('/data/2.5/forecast', {
-        params: {
-          lon: longitude,
-          lat: latitude,
-        },
-      });
-      console.log(response);
+      setLoading(true);
+      const data = await fetchWeather({ lon: longitude, lat: latitude });
+      setWeather(data);
+      setLoading(false);
     });
   }
 
@@ -44,30 +52,30 @@ function Today({ callBackButtonSearchForPlaces }) {
         </Header>
         <WeatherImages>
           <img className="clounds" src={Clouds} alt="clounds" />
+          <i className="wi wi-day-sprinkle" />
           {/* <img src={`https://www.metaweather.com/static/img/weather/${today.weather_state_abbr}.svg`} alt="rainDay" /> */}
         </WeatherImages>
         <Temperature>
           <div>
-            <span>10</span>
+            <span>{parseInt(weather.main.temp, 10)}</span>
             <strong>℃</strong>
           </div>
 
           <strong>
-            Tempo
-
+            {weather.weather[0].description}
           </strong>
         </Temperature>
 
         <Footer>
           <div>
-            <span>Today</span>
+            <span>hoje</span>
             <span>•</span>
-            <span>C</span>
+            <span>{dateFormatted}</span>
           </div>
 
           <Location>
             <MdLocationOn size={24} color="#88869D" />
-            Maringa
+            {weather.name}
           </Location>
         </Footer>
 

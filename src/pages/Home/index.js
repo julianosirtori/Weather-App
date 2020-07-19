@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import api from '../../services/api';
+import { fetchWeather } from '../../services/api';
 import { useWeather } from '../../context/Weathers';
+import { useLoading } from '../../context/Loading';
 import NextDays from '../../components/NextDays';
 import Today from '../../components/Today';
 import SearchLocation from '../../components/SearchLocation';
@@ -11,20 +12,17 @@ import { Container } from './styles';
 function Home() {
   const [showSearchLocation, setShowSearchLocation] = useState(false);
   const { setWeather } = useWeather();
+  const { setLoading } = useLoading();
 
   useEffect(() => {
-    async function fetchWeather() {
-      const response = await api.get('/data/2.5/forecast', {
-        params: {
-          lon: -51.94,
-          lat: -23.43,
-        },
-      });
-      const { data } = response;
+    async function loadWeather() {
+      setLoading(true);
+      const data = await fetchWeather({ q: 'Maringa' });
       setWeather(data);
+      setLoading(false);
     }
-    fetchWeather();
-  }, [setWeather]);
+    loadWeather();
+  }, [setWeather, setLoading]);
 
   function callBackButtonSearchForPlaces() {
     setShowSearchLocation(!showSearchLocation);
