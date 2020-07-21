@@ -1,85 +1,102 @@
 import React from 'react';
-import { MdNavigation } from 'react-icons/md';
 import { format } from 'date-fns';
+import findIconByCode from '../../utils/findIcon';
 import { useWeather } from '../../context/Weathers';
+import { useLoading } from '../../context/Loading';
 import {
   Container,
-  Header,
-  ButtonUnitTemperature,
   Days,
   DayContent,
   Day,
   MaxAndMin,
   TodayHighlights,
   Highlight,
-  WindDirection,
-  Footer
+  Footer,
+  PlaceholderDayContent,
+  PlaceholderHighlight,
 } from './styles';
-
 
 function NextDays() {
   const { weather } = useWeather();
+  const { loading } = useLoading();
 
-  const today = weather.consolidated_weather[0];
-
-  function formatDate(date){
-    return format(new Date(date), '	EEE, dd MMM')
+  function formattedDate(dt) {
+    return format(new Date(dt * 1000), "dd 'de' yyyy");
   }
 
   return (
     <Container>
-      <Header>
-        <ButtonUnitTemperature active={true}>℃</ButtonUnitTemperature>
-        <ButtonUnitTemperature active={false}>℉</ButtonUnitTemperature>
-      </Header>
       <Days>
-        { weather.consolidated_weather.map(day => (
-          <DayContent key={day.applicable_date}>
-            <Day>{formatDate(day.applicable_date)}</Day>
-            <img src={`https://www.metaweather.com/static/img/weather/${day.weather_state_abbr}.svg`} alt="rainDay"/>
-            <MaxAndMin>
-            <span>{parseInt(day.max_temp)}°C</span>
-              <span>{parseInt(day.min_temp)}°C</span>
-            </MaxAndMin>
-          </DayContent>
-        )) }
+
+        { loading
+          ? (
+            <>
+              <PlaceholderDayContent />
+              <PlaceholderDayContent />
+              <PlaceholderDayContent />
+              <PlaceholderDayContent />
+              <PlaceholderDayContent />
+            </>
+          )
+          : weather.daily.map((day) => (
+            <DayContent key={day.dt}>
+              <Day>{formattedDate(day.dt)}</Day>
+              <i className={findIconByCode(day.weather[0].id)} />
+              <MaxAndMin>
+                <span>
+                  {`${parseInt(day.temp.max, 10)}°C`}
+                </span>
+                <span>
+                  {`${parseInt(day.temp.min, 10)}°C`}
+                </span>
+              </MaxAndMin>
+            </DayContent>
+          )) }
 
       </Days>
-      <h2>Today’s Highlights </h2>
-      <TodayHighlights>
-        <Highlight>
-          <span>Wind status</span>
-          <div>
-            <strong>{parseInt(today.wind_speed)}</strong>
-            <span>mph</span>
-          </div>
-          <WindDirection>
-            <MdNavigation size={28} color="#FFF" />
-            {today.wind_direction_compass}
-          </WindDirection>
-        </Highlight>
-        <Highlight>
-          <span>Humidity</span>
-          <div>
-            <strong>{today.humidity}</strong>
-            <span>%</span>
-          </div>
-        </Highlight>
-        <Highlight>
-          <span>Visibility</span>
-          <div>
-            <strong>{today.visibility.toFixed(1).replace('.', ',')}</strong>
-            <span>miles</span>
-          </div>
-        </Highlight>
-        <Highlight>
-          <span>Air Pressure</span>
-          <div>
-            <strong>{parseInt(today.air_pressure)}</strong>
-            <span> mb</span>
-          </div>
-        </Highlight>
-      </TodayHighlights>
+      <h2>Destaques de hoje</h2>
+
+      { loading
+        ? (
+          <TodayHighlights>
+            <PlaceholderHighlight />
+            <PlaceholderHighlight />
+            <PlaceholderHighlight />
+            <PlaceholderHighlight />
+          </TodayHighlights>
+        ) : (
+          <TodayHighlights>
+            <Highlight>
+              <span>Status do vento</span>
+              <div>
+                <strong>{parseInt(weather.wind.speed, 10)}</strong>
+                <span>km/h</span>
+              </div>
+            </Highlight>
+            <Highlight>
+              <span>Umidade</span>
+              <div>
+                <strong>{weather.main.humidity}</strong>
+                <span>%</span>
+              </div>
+            </Highlight>
+            <Highlight>
+              <span>Nuvens</span>
+              <div>
+                <strong>{weather.clouds.all}</strong>
+                <span>%</span>
+              </div>
+            </Highlight>
+            <Highlight>
+              <span>Pressão do ar</span>
+              <div>
+                <strong>{weather.main.pressure}</strong>
+                <span>hPa</span>
+              </div>
+            </Highlight>
+          </TodayHighlights>
+        )}
+
       <Footer>Juliano Sirtori @ DevChallenges.io</Footer>
     </Container>
   );
