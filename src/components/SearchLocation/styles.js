@@ -7,6 +7,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 46px;
+
+  @media(max-width: 990px){
+    max-width: none;
+    height: 100vh;
+    padding: 16px;
+  }
 `;
 
 export const Header = styled.div`
@@ -38,6 +44,14 @@ export const Form = styled.form`
     font-weight: 600;
     border: none;
   }
+
+  @media(max-width: 990px){
+    flex-direction: column;
+
+    button{
+      margin-top: 16px;
+    }
+  }
 `;
 
 export const InputGroup = styled.div`
@@ -60,6 +74,9 @@ export const InputGroup = styled.div`
    border: none;
   }
 
+  @media(max-width: 990px){
+    margin-right: 0;
+  }
 `;
 
 export const ListLocation = styled.ul`

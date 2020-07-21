@@ -11,6 +11,11 @@ export const Container = styled.div`
   overflow: hidden;
   z-index: 5;
 
+  @media(max-width: 990px){
+    max-width: none;
+    height: 100vh;
+  }
+
 `;
 
 export const Header = styled.div`
@@ -20,6 +25,10 @@ export const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 46px;
+
+  @media(max-width: 990px){
+    padding: 24px;
+  }
 
   button{
     height: 40px;
@@ -60,6 +69,11 @@ export const WeatherImages = styled.div`
   img{
     position: absolute;
     left: 0px;
+
+    @media(max-width: 990px){
+      left: auto;
+      width: 100%;
+    }
   }
 `;
 

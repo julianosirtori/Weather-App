@@ -54,6 +54,12 @@ export const Days = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-top: 24px;
+
+  @media(max-width: 990px){
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const DayContent = styled.div`
@@ -72,6 +78,12 @@ export const DayContent = styled.div`
     padding-bottom: 16px;
     padding-top: 16px;
   }
+
+  @media(max-width: 990px){
+    margin-bottom: 16px;
+    max-width: 320px;
+  }
+
 `;
 
 export const Day = styled.div`
@@ -108,6 +120,12 @@ export const TodayHighlights = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 48px;
+
+  @media(max-width: 990px){
+    grid-template-columns: 1fr ;
+    grid-template-rows: 1fr ;
+    justify-items: center;
+  }
 `;
 
 export const Highlight = styled.div`
@@ -187,6 +205,15 @@ export const PlaceholderDayContent = styled.div`
     width: 150px;
     background: linear-gradient(to right, transparent 0%, #2f3359 50%, transparent 100%);
     animation: load infinite 1s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+
+  @media(max-width: 990px){
+    max-width: 320px;
+
+    &::before{
+      left: -320px;
+      width: 320px;
+    }
   }
 
 `;
