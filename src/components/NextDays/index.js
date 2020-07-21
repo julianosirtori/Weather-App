@@ -5,8 +5,6 @@ import { useWeather } from '../../context/Weathers';
 import { useLoading } from '../../context/Loading';
 import {
   Container,
-  Header,
-  ButtonUnitTemperature,
   Days,
   DayContent,
   Day,
@@ -28,11 +26,6 @@ function NextDays() {
 
   return (
     <Container>
-      <Header>
-        <ButtonUnitTemperature active>℃</ButtonUnitTemperature>
-        <ButtonUnitTemperature active={false}>℉</ButtonUnitTemperature>
-      </Header>
-
       <Days>
 
         { loading
