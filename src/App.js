@@ -10,8 +10,8 @@ function App() {
   return (
     <LoadingProvider>
       <WeathersProvider>
-        <GlobalStyle />
         <Home />
+        <GlobalStyle />
       </WeathersProvider>
     </LoadingProvider>
 
